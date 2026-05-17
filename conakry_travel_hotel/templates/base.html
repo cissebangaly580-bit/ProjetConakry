@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Conakry Travel & Hôtel{% endblock %}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background-color: #2c3e50;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar-brand {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        
+        .navbar-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        .navbar-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .navbar-menu a:hover {
+            background-color: #34495e;
+        }
+        
+        .navbar-user {
+            color: #ecf0f1;
+            font-size: 14px;
+        }
+        
+        .btn-deconnexion {
+            background-color: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        
+        .btn-deconnexion:hover {
+            background-color: #c0392b;
+        }
+        
+        /* ===== CONTENU ===== */
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .card-title {
+            font-size: 18px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        /* ===== TABLEAU DE BORD ===== */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .stat-label {
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+        
+        /* ===== MESSAGES ===== */
+        .messages {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .messages li {
+            padding: 12px 15px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        
+        .messages .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .messages .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        /* ===== FORMULAIRES ===== */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        
+        .btn-submit {
+            background-color: #3498db;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .btn-submit:hover {
+            background-color: #2980b9;
+        }
+        
+        /* ===== LOGIN PAGE ===== */
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .login-title {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        
+        .login-logo {
+            text-align: center;
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <!-- NAVBAR (visible seulement si connecté) -->
+    <nav class="navbar">
+        <a href="{% url 'accueil' %}" class="navbar-brand">🌍 Conakry Travel & Hôtel</a>
+        
+        <ul class="navbar-menu">
+            <li><a href="{% url 'accueil' %}">🏠 Accueil</a></li>
+            <li><a href="/clients/">👥 Clients</a></li>
+            <li><a href="/voyages/">✈️ Voyages</a></li>
+            <li><a href="/hotel/">🏨 Hôtel</a></li>
+            <li><a href="/reservations/">📋 Réservations</a></li>
+            <li><a href="/factures/">💰 Factures</a></li>
+        </ul>
+        
+        <div class="navbar-user">
+            👤 {{ user.username }}
+            <a href="{% url 'deconnexion' %}" class="btn-deconnexion">Déconnexion</a>
+        </div>
+    </nav>
+    {% endif %}
+    
+    <!-- CONTENU -->
+    <div class="container">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
+        {% block content %}{% endblock %}
+    </div>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -62,10 +62,12 @@ ROOT_URLCONF = "Gestion_Agence_hotel.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "Conakry_travel_hotel" / "templates"],
+        # ajouter cette kigne pour que Django puisse trouver les templates dans les apps
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
+                "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
