@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Conakry Travel & Hôtel{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'conakry_travel_hotel/css/conakry_travel_hotel.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <!-- NAVBAR (visible seulement si connecté) -->
+    <nav class="navbar">
+        <a href="{% url 'accueil' %}" class="navbar-brand">🌍 Conakry Travel & Hôtel</a>
+        
+        <ul class="navbar-menu">
+            <li><a href="{% url 'accueil' %}">🏠 Accueil</a></li>
+            <li><a href="/clients/">👥 Clients</a></li>
+            <li><a href="/voyages/">✈️ Voyages</a></li>
+            <li><a href="/hotel/">🏨 Hôtel</a></li>
+            <li><a href="/reservations/">📋 Réservations</a></li>
+            <li><a href="/factures/">💰 Factures</a></li>
+        </ul>
+        
+        <div class="navbar-user">
+            👤 {{ user.username }}
+            <a href="{% url 'deconnexion' %}" class="btn-deconnexion">Déconnexion</a>
+        </div>
+    </nav>
+    {% endif %}
+    
+    <!-- CONTENU -->
+    <div class="container">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        
+        {% block content %}{% endblock %}
+    </div>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

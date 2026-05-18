@@ -1,0 +1,88 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block title %}Tableau de bord - Conakry Travel & Hôtel{% endblock %}
+
+{% block content %}
+<h1 class="dashboard-title">Tableau de bord</h1>
+<p class="dashboard-subtitle">Bienvenue {{ user.username }} ! Voici l'état de votre agence.</p>
+
+<!-- STATISTIQUES -->
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-number">👥</div>
+        <div class="stat-label">Clients</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">✈️</div>
+        <div class="stat-label">Voyages</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">🏨</div>
+        <div class="stat-label">Chambres</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">📋</div>
+        <div class="stat-label">Réservations</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">💰</div>
+        <div class="stat-label">Factures</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">👤</div>
+        <div class="stat-label">Agents</div>
+    </div>
+</div>
+
+<!-- MODULES DISPONIBLES -->
+<div class="card">
+    <h2 class="card-title">🚀 Modules du système</h2>
+    <div class="modules-grid">
+        <a href="/clients/" class="module-link">
+            <div class="module-card module-clients">
+                <div class="module-icon">👥</div>
+                <div class="module-label">Gestion Clients</div>
+            </div>
+        </a>
+        <a href="/voyages/" class="module-link">
+            <div class="module-card module-voyages">
+                <div class="module-icon">✈️</div>
+                <div class="module-label">Gestion Voyages</div>
+            </div>
+        </a>
+        <a href="/hotel/" class="module-link">
+            <div class="module-card module-hotel">
+                <div class="module-icon">🏨</div>
+                <div class="module-label">Gestion Hôtel</div>
+            </div>
+        </a>
+        <a href="/reservations/" class="module-link">
+            <div class="module-card module-reservations">
+                <div class="module-icon">📋</div>
+                <div class="module-label">Réservations</div>
+            </div>
+        </a>
+        <a href="/factures/" class="module-link">
+            <div class="module-card module-facturation">
+                <div class="module-icon">💰</div>
+                <div class="module-label">Facturation</div>
+            </div>
+        </a>
+    </div>
+</div>
+
+<!-- RÈGLES DE GESTION -->
+<div class="card">
+    <h2 class="card-title">📋 Règles de gestion implémentées</h2>
+    <ul class="rules-list">
+        <li> RG1 : Email unique pour chaque client</li>
+        <li> RG2 : Pas de réservation si places = 0</li>
+        <li> RG3 : Pas de double attribution de chambre</li>
+        <li> RG4 : Réservation confirmée = facture générée</li>
+        <li> RG5 : Réservation annulée non modifiable</li>
+        <li> RG6 : Facture payée si montant reçu ≥ montant dû</li>
+        <li> RG7 : Paiement : Espèces ou Mobile Money uniquement</li>
+        <li> RG8 : Chaque agent limité à son rôle</li>
+    </ul>
+</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'conakry_travel_hotel/base.html' %}
 
 {% block title %}Connexion - Conakry Travel & Hôtel{% endblock %}
 
@@ -6,9 +6,9 @@
 <div class="login-container">
     <div class="login-logo">🌍</div>
     <h1 class="login-title">Conakry Travel & Hôtel</h1>
-    <p style="text-align: center; color: #7f8c8d; margin-bottom: 30px;">Système de Gestion Intégrée</p>
+    <p class="login-subtitle">Système de Gestion Intégrée</p>
     
-    <form method="post">
+    <form method="post" action="{% url 'connexion' %}">
         {% csrf_token %}
         
         <div class="form-group">
@@ -21,10 +21,10 @@
             <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
         </div>
         
-        <button type="submit" class="btn-submit" style="width: 100%;">Se connecter</button>
+        <button type="submit" class="btn-submit btn-submit-full">Se connecter</button>
     </form>
     
-    <p style="text-align: center; margin-top: 20px; color: #7f8c8d; font-size: 12px;">
+    <p class="login-footer">
         Licence 3 Informatique | Guinée 2025/2026
     </p>
 </div>
