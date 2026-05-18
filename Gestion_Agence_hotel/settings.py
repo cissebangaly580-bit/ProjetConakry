@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
     "conakry_travel_hotel",
     "gestion_clients",
     "gestion_voyages",
@@ -62,7 +61,7 @@ ROOT_URLCONF = "Gestion_Agence_hotel.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "Conakry_travel_hotel" / "templates"],
+        "DIRS": [BASE_DIR / "templates"],
         # ajouter cette kigne pour que Django puisse trouver les templates dans les apps
         "APP_DIRS": True,
         "OPTIONS": {
