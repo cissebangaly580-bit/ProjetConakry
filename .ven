@@ -1,0 +1,13 @@
+
+# Django
+SECRET_KEY=django-insecure-CHANGE-MOI-EN-PRODUCTION
+DEBUG=True
+
+# Base de données (exemple avec PostgreSQL)
+DB_NAME=conakry_db
+DB_USER=postgres
+DB_PASSWORD=cisse2002
+DB_HOST=localhost
+DB_PORT=5432
+
+# Si tu utilises MySQL à la place, les noms restent les mêmes
