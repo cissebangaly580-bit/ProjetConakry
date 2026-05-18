@@ -1,0 +1,8 @@
+# Crée le fichier .ven.example avec un modèle
+echo "SECRET_KEY=change-moi
+DEBUG=True
+DB_NAME=conakry_travel_db
+DB_USER=ton_user
+DB_PASSWORD=ton_mot_de_passe
+DB_HOST=localhost
+DB_PORT=5432" > .ven.example
