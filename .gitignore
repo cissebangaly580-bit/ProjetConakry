@@ -1,0 +1,26 @@
+# Environnement virtuel
+.venv/
+venv/
+env/
+
+# Fichier des secrets (mot de passe BDD, clé Django)
+.ven
+
+# Base de données locale SQLite (si tu en as une)
+db.sqlite3
+
+# Fichiers Python compilés
+__pycache__/
+*.pyc
+*.pyo
+
+# Migrations compilées (optionnel, selon ton équipe)
+# */migrations/__pycache__/
+
+# IDE
+.vscode/
+.idea/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
