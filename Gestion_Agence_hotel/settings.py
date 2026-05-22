@@ -86,7 +86,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'conakry_db',
         'USER': 'postgres',
-        'PASSWORD': 'cisse2002',
+        'PASSWORD': '12345',
         'HOST': 'localhost',
         'PORT': '5432',
     }
