@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'conakry_db',  # ← Vérifie qu'il n'y a PAS d'accent ici
         'USER': 'postgres',
-        'PASSWORD': 'cisse2002',
+        'PASSWORD': 'camara29',
         'HOST': 'localhost',
         'PORT': '5432',
     }
