@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reçu de paiement</title>
+</head>
+<body>
+
+<h1>Reçu de paiement</h1>
+
+<p><strong>Facture :</strong> {{ paiement.facture.numero_facture }}</p>
+<p><strong>Client :</strong> {{ paiement.facture.client }}</p>
+<p><strong>Montant payé :</strong> {{ paiement.montant_paye }} GNF</p>
+<p><strong>Mode :</strong> {{ paiement.mode_paiement }}</p>
+<p><strong>Date :</strong> {{ paiement.date_paiement }}</p>
+
+<hr>
+
+<p>Merci pour votre paiement ✔</p>
+
+<a href="{% url 'facture_liste' %}">Retour à la liste</a>
+
+</body>
+</html>

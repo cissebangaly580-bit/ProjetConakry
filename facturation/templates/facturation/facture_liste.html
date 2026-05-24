@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liste des factures</title>
+</head>
+<body>
+
+<h1>Liste des factures</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Numéro</th>
+            <th>Client</th>
+            <th>Montant</th>
+            <th>Statut</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for facture in factures %}
+        <tr>
+            <td>{{ facture.numero_facture }}</td>
+            <td>{{ facture.client }}</td>
+            <td>{{ facture.montant }} GNF</td>
+            <td>{{ facture.statut }}</td>
+            <td>
+                <a href="{% url 'facture_detail' facture.id %}">Voir</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">Aucune facture disponible</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div style="max-width:600px; margin:auto;">
+
+  <h2>🧾 Facture N° {{ facture.id }}</h2>
+  <hr>
+  <p><strong>Client :</strong> {{ facture.reservation.client }}</p>
+  <p><strong>Réservation :</strong> {{ facture.reservation }}</p>
+  {% if facture.reservation.chambre %}
+  <p><strong>Chambre :</strong> {{ facture.reservation.chambre }}</p>
+  {% endif %}
+  {% if facture.reservation.voyage %}
+  <p><strong>Voyage :</strong> {{ facture.reservation.voyage }}</p>
+  {% endif %}
+  <p><strong>Montant total :</strong> {{ facture.montant }} GNF</p>
+  <p><strong>Date d'émission :</strong> {{ facture.date_emission }}</p>
+  <p><strong>Statut :</strong>
+    {% if facture.statut_paiement == 'paye' %}
+      ✅ Payé
+    {% else %}
+      ⏳ En attente
+    {% endif %}
+  </p>
+  <hr>
+
+  {% if facture.statut_paiement != 'paye' %}
+  <h4>💳 Choisir le mode de paiement</h4>
+  <form method="post">
+    {% csrf_token %}
+    <select name="mode_paiement" style="padding:8px; margin-bottom:10px;">
+      <option value="especes">💵 Espèces</option>
+      <option value="orange_money">🟠 Orange Money</option>
+      <option value="mtn_momo">🟡 MTN MoMo</option>
+    </select>
+    <br>
+    <button type="submit" style="background:green; color:white; padding:10px 20px; border:none; cursor:pointer;">
+      ✅ Valider le paiement
+    </button>
+  </form>
+  {% else %}
+  <p>✅ Ce paiement a déjà été effectué via <strong>{{ facture.mode_paiement }}</strong>.</p>
+  {% endif %}
+
+  <br>
+  <!-- 🖨️ Bouton imprimer -->
+  <button onclick="window.print()"
+    style="background:#333; color:white; padding:10px 20px; border:none; cursor:pointer;">
+    🖨️ Imprimer la facture
+  </button>
+
+  <a href="{% url 'historique_paiements' %}"
+    style="margin-left:15px; color:blue;">
+    ← Retour à l'historique
+  </a>
+
+</div>
+
+{% endblock %}

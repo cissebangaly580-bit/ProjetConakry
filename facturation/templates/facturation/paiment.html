@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Paiement</title>
+</head>
+<body>
+
+<h1>Paiement de la facture</h1>
+
+<p>Facture : {{ facture.numero_facture }}</p>
+<p>Montant à payer : {{ facture.montant }} GNF</p>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Montant payé :</label>
+    <input type="number" name="montant_paye" required>
+
+    <br><br>
+
+    <label>Mode de paiement :</label>
+    <select name="mode_paiement">
+        <option value="Especes">Espèces</option>
+        <option value="MobileMoney">Mobile Money</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Valider paiement</button>
+</form>
+
+</body>
+</html>
