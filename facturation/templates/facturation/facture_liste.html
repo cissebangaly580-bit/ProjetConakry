@@ -1,41 +1,52 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Liste des factures</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block content %}
 
-<h1>Liste des factures</h1>
+<h2>🧾 Liste des Factures</h2>
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>Numéro</th>
-            <th>Client</th>
-            <th>Montant</th>
-            <th>Statut</th>
-            <th>Action</th>
-        </tr>
-    </thead>
+<a href="{% url 'ajouter_facture' %}"
+  style="background:green; color:white; padding:10px 20px;
+         text-decoration:none; border-radius:5px; margin-bottom:15px; display:inline-block;">
+  ➕ Ajouter une Facture
+</a>
 
-    <tbody>
-        {% for facture in factures %}
-        <tr>
-            <td>{{ facture.numero_facture }}</td>
-            <td>{{ facture.client }}</td>
-            <td>{{ facture.montant }} GNF</td>
-            <td>{{ facture.statut }}</td>
-            <td>
-                <a href="{% url 'facture_detail' facture.id %}">Voir</a>
-            </td>
-        </tr>
-        {% empty %}
-        <tr>
-            <td colspan="5">Aucune facture disponible</td>
-        </tr>
-        {% endfor %}
-    </tbody>
+<br><br>
+
+<table border="1" cellpadding="10" cellspacing="0"
+  style="width:100%; border-collapse:collapse; text-align:left;">
+  <tr style="background:#1a5276; color:white;">
+    <th>N° Facture</th>
+    <th>Réservation</th>
+    <th>Montant</th>
+    <th>Mode paiement</th>
+    <th>Statut</th>
+    <th>Date émission</th>
+    <th>Action</th>
+  </tr>
+  {% for f in factures %}
+  <tr>
+    <td>{{ f.id }}</td>
+    <td>{{ f.reservation }}</td>
+    <td>{{ f.montant }} GNF</td>
+    <td>{{ f.mode_paiement|default:"—" }}</td>
+    <td>
+      {% if f.statut_paiement == 'payee' %}
+        <span style="color:green;">✅ Payée</span>
+      {% else %}
+        <span style="color:orange;">⏳ En attente</span>
+      {% endif %}
+    </td>
+    <td>{{ f.date_emission }}</td>
+    <td>
+      <a href="{% url 'detail_facture' f.id %}">👁️ Voir</a>
+    </td>
+  </tr>
+  {% empty %}
+  <tr>
+    <td colspan="7" style="text-align:center; padding:20px;">
+      Aucune facture trouvée.
+    </td>
+  </tr>
+  {% endfor %}
 </table>
 
-</body>
-</html>
+{% endblock %}
