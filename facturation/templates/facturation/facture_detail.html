@@ -1,56 +1,194 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div style="max-width:600px; margin:auto;">
+<div style="max-width:650px; margin:auto; font-family:Arial;">
 
   <h2>🧾 Facture N° {{ facture.id }}</h2>
   <hr>
-  <p><strong>Client :</strong> {{ facture.reservation.client }}</p>
-  <p><strong>Réservation :</strong> {{ facture.reservation }}</p>
-  {% if facture.reservation.chambre %}
-  <p><strong>Chambre :</strong> {{ facture.reservation.chambre }}</p>
-  {% endif %}
-  {% if facture.reservation.voyage %}
-  <p><strong>Voyage :</strong> {{ facture.reservation.voyage }}</p>
-  {% endif %}
-  <p><strong>Montant total :</strong> {{ facture.montant }} GNF</p>
-  <p><strong>Date d'émission :</strong> {{ facture.date_emission }}</p>
-  <p><strong>Statut :</strong>
-    {% if facture.statut_paiement == 'paye' %}
-      ✅ Payé
-    {% else %}
-      ⏳ En attente
+
+  <!-- Infos facture -->
+  <table style="width:100%; margin-bottom:20px;">
+    <tr>
+      <td><strong>Client :</strong></td>
+      <td>{{ facture.reservation.client }}</td>
+    </tr>
+    <tr>
+      <td><strong>Réservation N° :</strong></td>
+      <td>{{ facture.reservation.id }}</td>
+    </tr>
+    {% if facture.reservation.chambre %}
+    <tr>
+      <td><strong>Chambre :</strong></td>
+      <td>{{ facture.reservation.chambre }} — {{ facture.reservation.chambre.prix_nuit }} GNF/nuit</td>
+    </tr>
     {% endif %}
-  </p>
+    {% if facture.reservation.voyage %}
+    <tr>
+      <td><strong>Voyage :</strong></td>
+      <td>{{ facture.reservation.voyage }} — {{ facture.reservation.voyage.prix }} GNF</td>
+    </tr>
+    {% endif %}
+    <tr>
+      <td><strong>Montant dû :</strong></td>
+      <td><strong style="color:red; font-size:18px;">{{ facture.montant }} GNF</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Date d'émission :</strong></td>
+      <td>{{ facture.date_emission }}</td>
+    </tr>
+    <tr>
+      <td><strong>Statut :</strong></td>
+      <td>
+        {% if facture.statut_paiement == 'paye' %}
+          <span style="color:green; font-weight:bold;">✅ Payée</span>
+        {% else %}
+          <span style="color:orange; font-weight:bold;">⏳ En attente</span>
+        {% endif %}
+      </td>
+    </tr>
+  </table>
+
   <hr>
 
+  <!-- Formulaire paiement (RG6 + RG7) -->
   {% if facture.statut_paiement != 'paye' %}
-  <h4>💳 Choisir le mode de paiement</h4>
+  <h4>💳 Enregistrer le paiement</h4>
+
+  {% if messages %}
+    {% for message in messages %}
+      <p style="color:red;">{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+
   <form method="post">
     {% csrf_token %}
-    <select name="mode_paiement" style="padding:8px; margin-bottom:10px;">
+    <label>Mode de paiement (RG7 — Espèces ou Mobile Money) :</label><br>
+    <select name="mode_paiement" style="padding:8px; margin:10px 0; width:100%;">
       <option value="especes">💵 Espèces</option>
       <option value="orange_money">🟠 Orange Money</option>
       <option value="mtn_momo">🟡 MTN MoMo</option>
-    </select>
-    <br>
-    <button type="submit" style="background:green; color:white; padding:10px 20px; border:none; cursor:pointer;">
+    </select><br>
+
+    <label>Montant reçu (GNF) :</label><br>
+    <input type="number" name="montant_recu" placeholder="Ex: 500000"
+      style="padding:8px; margin:10px 0; width:100%;" required><br>
+
+    <button type="submit"
+      style="background:green; color:white; padding:12px 25px; border:none; cursor:pointer; font-size:16px;">
       ✅ Valider le paiement
     </button>
   </form>
+
   {% else %}
-  <p>✅ Ce paiement a déjà été effectué via <strong>{{ facture.mode_paiement }}</strong>.</p>
+  <p>✅ Paiement effectué via <strong>{{ facture.mode_paiement }}</strong>.</p>
   {% endif %}
 
   <br>
-  <!-- 🖨️ Bouton imprimer -->
+  <!-- Bouton imprimer -->
   <button onclick="window.print()"
-    style="background:#333; color:white; padding:10px 20px; border:none; cursor:pointer;">
-    🖨️ Imprimer la facture
+    style="background:#333; color:white; padding:10px 20px; border:none; cursor:pointer; margin-right:10px;">
+    🖨️ Imprimer / Télécharger
   </button>
 
-  <a href="{% url 'historique_paiements' %}"
-    style="margin-left:15px; color:blue;">
+  <a href="{% url 'historique_paiements' %}" style="color:blue;">
+    ← Retour à l'historique
+  </a>
+
+</div>
+
+{% endblock %}{% extends 'base.html' %}
+{% block content %}
+
+<div style="max-width:650px; margin:auto; font-family:Arial;">
+
+  <h2>🧾 Facture N° {{ facture.id }}</h2>
+  <hr>
+
+  <!-- Infos facture -->
+  <table style="width:100%; margin-bottom:20px;">
+    <tr>
+      <td><strong>Client :</strong></td>
+      <td>{{ facture.reservation.client }}</td>
+    </tr>
+    <tr>
+      <td><strong>Réservation N° :</strong></td>
+      <td>{{ facture.reservation.id }}</td>
+    </tr>
+    {% if facture.reservation.chambre %}
+    <tr>
+      <td><strong>Chambre :</strong></td>
+      <td>{{ facture.reservation.chambre }} — {{ facture.reservation.chambre.prix_nuit }} GNF/nuit</td>
+    </tr>
+    {% endif %}
+    {% if facture.reservation.voyage %}
+    <tr>
+      <td><strong>Voyage :</strong></td>
+      <td>{{ facture.reservation.voyage }} — {{ facture.reservation.voyage.prix }} GNF</td>
+    </tr>
+    {% endif %}
+    <tr>
+      <td><strong>Montant dû :</strong></td>
+      <td><strong style="color:red; font-size:18px;">{{ facture.montant }} GNF</strong></td>
+    </tr>
+    <tr>
+      <td><strong>Date d'émission :</strong></td>
+      <td>{{ facture.date_emission }}</td>
+    </tr>
+    <tr>
+      <td><strong>Statut :</strong></td>
+      <td>
+        {% if facture.statut_paiement == 'paye' %}
+          <span style="color:green; font-weight:bold;">✅ Payée</span>
+        {% else %}
+          <span style="color:orange; font-weight:bold;">⏳ En attente</span>
+        {% endif %}
+      </td>
+    </tr>
+  </table>
+
+  <hr>
+
+  <!-- Formulaire paiement (RG6 + RG7) -->
+  {% if facture.statut_paiement != 'paye' %}
+  <h4>💳 Enregistrer le paiement</h4>
+
+  {% if messages %}
+    {% for message in messages %}
+      <p style="color:red;">{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <label>Mode de paiement (RG7 — Espèces ou Mobile Money) :</label><br>
+    <select name="mode_paiement" style="padding:8px; margin:10px 0; width:100%;">
+      <option value="especes">💵 Espèces</option>
+      <option value="orange_money">🟠 Orange Money</option>
+      <option value="mtn_momo">🟡 MTN MoMo</option>
+    </select><br>
+
+    <label>Montant reçu (GNF) :</label><br>
+    <input type="number" name="montant_recu" placeholder="Ex: 500000"
+      style="padding:8px; margin:10px 0; width:100%;" required><br>
+
+    <button type="submit"
+      style="background:green; color:white; padding:12px 25px; border:none; cursor:pointer; font-size:16px;">
+      ✅ Valider le paiement
+    </button>
+  </form>
+
+  {% else %}
+  <p>✅ Paiement effectué via <strong>{{ facture.mode_paiement }}</strong>.</p>
+  {% endif %}
+
+  <br>
+  <!-- Bouton imprimer -->
+  <button onclick="window.print()"
+    style="background:#333; color:white; padding:10px 20px; border:none; cursor:pointer; margin-right:10px;">
+    🖨️ Imprimer / Télécharger
+  </button>
+
+  <a href="{% url 'historique_paiements' %}" style="color:blue;">
     ← Retour à l'historique
   </a>
 

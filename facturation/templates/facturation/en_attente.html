@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>⏳ Factures en attente de paiement</h2>
+
+{% if factures %}
+<table border="1" cellpadding="10" cellspacing="0"
+  style="width:100%; border-collapse:collapse;">
+  <tr style="background:#fff3cd;">
+    <th>N° Facture</th>
+    <th>Client</th>
+    <th>Montant dû</th>
+    <th>Date émission</th>
+    <th>Action</th>
+  </tr>
+  {% for f in factures %}
+  <tr>
+    <td>{{ f.id }}</td>
+    <td>{{ f.reservation.client }}</td>
+    <td style="color:red; font-weight:bold;">{{ f.montant }} GNF</td>
+    <td>{{ f.date_emission }}</td>
+    <td><a href="{% url 'detail_facture' f.id %}">💳 Payer</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% else %}
+  <p style="color:green;">✅ Aucune facture en attente !</p>
+{% endif %}
+
+{% endblock %}

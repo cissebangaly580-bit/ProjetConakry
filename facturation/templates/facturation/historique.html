@@ -3,21 +3,23 @@
 
 <h2>📋 Historique des paiements</h2>
 
-<!-- 🔍 Filtre par statut -->
+<!-- Filtre par statut -->
 <form method="get" style="margin-bottom:15px;">
-  <select name="statut" onchange="this.form.submit()">
-    <option value="">-- Tous les statuts --</option>
-    <option value="paye" {% if statut_filtre == 'paye' %}selected{% endif %}>✅ Payé</option>
+  <select name="statut" onchange="this.form.submit()"
+    style="padding:8px; margin-right:10px;">
+    <option value="">-- Tous --</option>
+    <option value="paye" {% if statut_filtre == 'paye' %}selected{% endif %}>✅ Payées</option>
     <option value="en_attente" {% if statut_filtre == 'en_attente' %}selected{% endif %}>⏳ En attente</option>
   </select>
 </form>
 
-<table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse;">
+<table border="1" cellpadding="10" cellspacing="0"
+  style="width:100%; border-collapse:collapse; text-align:left;">
   <tr style="background:#f0f0f0;">
     <th>N° Facture</th>
     <th>Client</th>
     <th>Montant</th>
-    <th>Mode de paiement</th>
+    <th>Mode paiement</th>
     <th>Statut</th>
     <th>Date</th>
     <th>Action</th>
@@ -30,18 +32,20 @@
     <td>{{ f.mode_paiement|default:"—" }}</td>
     <td>
       {% if f.statut_paiement == 'paye' %}
-        ✅ Payé
+        <span style="color:green;">✅ Payée</span>
       {% else %}
-        ⏳ En attente
+        <span style="color:orange;">⏳ En attente</span>
       {% endif %}
     </td>
     <td>{{ f.date_emission }}</td>
-    <td>
-      <a href="{% url 'detail_facture' f.id %}">Voir</a>
-    </td>
+    <td><a href="{% url 'detail_facture' f.id %}">👁️ Voir</a></td>
   </tr>
   {% empty %}
-  <tr><td colspan="7" style="text-align:center;">Aucune facture trouvée.</td></tr>
+  <tr>
+    <td colspan="7" style="text-align:center; padding:20px;">
+      Aucune facture trouvée.
+    </td>
+  </tr>
   {% endfor %}
 </table>
 
