@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Facture, Reservation
+from conakry_travel_hotel.models import Facture, Reservation
 
 # ✅ RG4 : Toute réservation confirmée génère une facture
 @login_required
