@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>➕ Ajouter une Facture</h2>
+<hr>
+
+{% if messages %}
+  {% for message in messages %}
+    <p style="color:green;">{{ message }}</p>
+  {% endfor %}
+{% endif %}
+
+<form method="post" style="max-width:600px;">
+  {% csrf_token %}
+
+  <label>Réservation :</label><br>
+  {{ form.reservation }}<br><br>
+
+  <label>Montant (GNF) :</label><br>
+  {{ form.montant }}<br><br>
+
+  <label>Mode de paiement :</label><br>
+  {{ form.mode_paiement }}<br><br>
+
+  <label>Statut :</label><br>
+  {{ form.statut_paiement }}<br><br>
+
+  <button type="submit"
+    style="background:green; color:white; padding:12px 25px;
+           border:none; cursor:pointer; font-size:16px; border-radius:5px;">
+    💾 Enregistrer la Facture
+  </button>
+
+  <a href="{% url 'liste_factures' %}"
+    style="margin-left:15px; color:blue;">
+    ← Annuler
+  </a>
+
+</form>
+
+{% endblock %}
