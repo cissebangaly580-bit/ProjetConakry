@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center mt-4">
+    <h1>🏨 Bienvenue dans la Gestion Hôtel</h1>
+    <p class="lead">Faites votre choix :</p>
+</div>
+
+<div class="row mt-4 justify-content-center">
+    <div class="col-md-4 mb-3">
+        <a href="/chambres" class="text-decoration-none">
+            <div class="card text-center shadow p-3" style="cursor:pointer;">
+                <h1>1</h1>
+                <h5>🏨 Chambres</h5>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="/clients" class="text-decoration-none">
+            <div class="card text-center shadow p-3" style="cursor:pointer;">
+                <h1>2</h1>
+                <h5>👤 Clients</h5>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="/agents" class="text-decoration-none">
+            <div class="card text-center shadow p-3" style="cursor:pointer;">
+                <h1>3</h1>
+                <h5>👷 Agents</h5>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="/reservations" class="text-decoration-none">
+            <div class="card text-center shadow p-3" style="cursor:pointer;">
+                <h1>4</h1>
+                <h5>📋 Réservations</h5>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="/factures" class="text-decoration-none">
+            <div class="card text-center shadow p-3" style="cursor:pointer;">
+                <h1>5</h1>
+                <h5>🧾 Factures</h5>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="/voyages" class="text-decoration-none">
+            <div class="card text-center shadow p-3" style="cursor:pointer;">
+                <h1>6</h1>
+                <h5>✈️ Voyages</h5>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-4 mb-3">
+        <a href="/quitter" class="text-decoration-none">
+            <div class="card text-center shadow p-3 bg-danger text-white" style="cursor:pointer;">
+                <h1>0</h1>
+                <h5>🚪 Quitter</h5>
+            </div>
+        </a>
+    </div>
+</div>
+{% endblock %}

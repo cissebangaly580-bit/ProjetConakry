@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2>🧾 Modifier une Facture</h2>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.reservation_id.label(class="form-label") }}
+                {{ form.reservation_id(class="form-select") }}
+            </div>
+            <div class="mb-3">
+                {{ form.montant.label(class="form-label") }}
+                {{ form.montant(class="form-control", value=facture[2]) }}
+            </div>
+            <div class="mb-3">
+                {{ form.mode_paiement.label(class="form-label") }}
+                {{ form.mode_paiement(class="form-select") }}
+            </div>
+            <div class="mb-3">
+                {{ form.statut_paiement.label(class="form-label") }}
+                {{ form.statut_paiement(class="form-select") }}
+            </div>
+            <button type="submit" class="btn btn-warning">Modifier</button>
+            <a href="/factures" class="btn btn-secondary">Annuler</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

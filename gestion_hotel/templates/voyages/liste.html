@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>✈️ Liste des Voyages</h2>
+    <a href="/voyages/ajouter" class="btn btn-success">+ Ajouter</a>
+</div>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Destination</th>
+            <th>Description</th>
+            <th>Date départ</th>
+            <th>Date retour</th>
+            <th>Prix</th>
+            <th>Places</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for voyage in voyages %}
+        <tr>
+            <td>{{ voyage[0] }}</td>
+            <td>{{ voyage[1] }}</td>
+            <td>{{ voyage[2] }}</td>
+            <td>{{ voyage[3] }}</td>
+            <td>{{ voyage[4] }}</td>
+            <td>{{ voyage[5] }} GNF</td>
+            <td>{{ voyage[6] }}</td>
+            <td>
+                <a href="/voyages/modifier/{{ voyage[0] }}" class="btn btn-warning btn-sm">✏️ Modifier</a>
+                <a href="/voyages/supprimer/{{ voyage[0] }}" class="btn btn-danger btn-sm" onclick="return confirm('Confirmer la suppression ?')">🗑️ Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

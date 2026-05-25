@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>📋 Liste des Réservations</h2>
+    <a href="/reservations/ajouter" class="btn btn-success">+ Ajouter</a>
+</div>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Statut</th>
+            <th>Montant</th>
+            <th>Client</th>
+            <th>Agent</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation[0] }}</td>
+            <td>{{ reservation[1] }}</td>
+            <td>
+                {% if reservation[2] == 'en cours' %}
+                    <span class="badge bg-warning">en cours</span>
+                {% elif reservation[2] == 'terminée' %}
+                    <span class="badge bg-success">terminée</span>
+                {% else %}
+                    <span class="badge bg-danger">{{ reservation[2] }}</span>
+                {% endif %}
+            </td>
+            <td>{{ reservation[3] }} GNF</td>
+            <td>{{ reservation[4] }}</td>
+            <td>{{ reservation[5] }}</td>
+            <td>
+                <a href="/reservations/modifier/{{ reservation[0] }}" class="btn btn-warning btn-sm">✏️ Modifier</a>
+                <a href="/reservations/supprimer/{{ reservation[0] }}" class="btn btn-danger btn-sm" onclick="return confirm('Confirmer la suppression ?')">🗑️ Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

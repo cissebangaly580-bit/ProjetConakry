@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>🧾 Liste des Factures</h2>
+    <a href="/factures/ajouter" class="btn btn-success">+ Ajouter</a>
+</div>
+
+<table class="table table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Montant</th>
+            <th>Statut</th>
+            <th>Mode paiement</th>
+            <th>Client</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for facture in factures %}
+        <tr>
+            <td>{{ facture[0] }}</td>
+            <td>{{ facture[1] }}</td>
+            <td>{{ facture[2] }} GNF</td>
+            <td>
+                {% if facture[3] == 'payée' %}
+                    <span class="badge bg-success">payée</span>
+                {% elif facture[3] == 'partielle' %}
+                    <span class="badge bg-warning">partielle</span>
+                {% else %}
+                    <span class="badge bg-danger">impayée</span>
+                {% endif %}
+            </td>
+            <td>{{ facture[4] }}</td>
+            <td>{{ facture[5] }}</td>
+            <td>
+                <a href="/factures/modifier/{{ facture[0] }}" class="btn btn-warning btn-sm">✏️ Modifier</a>
+                <a href="/factures/supprimer/{{ facture[0] }}" class="btn btn-danger btn-sm" onclick="return confirm('Confirmer la suppression ?')">🗑️ Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

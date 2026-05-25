@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2>🏨 Modifier une Chambre</h2>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.numero.label(class="form-label") }}
+                {{ form.numero(class="form-control", value=chambre[1]) }}
+            </div>
+            <div class="mb-3">
+                {{ form.type_chambre.label(class="form-label") }}
+                {{ form.type_chambre(class="form-select") }}
+            </div>
+            <div class="mb-3">
+                {{ form.prix_nuit.label(class="form-label") }}
+                {{ form.prix_nuit(class="form-control", value=chambre[3]) }}
+            </div>
+            <div class="mb-3">
+                {{ form.capacite.label(class="form-label") }}
+                {{ form.capacite(class="form-control", value=chambre[4]) }}
+            </div>
+            <div class="mb-3">
+                {{ form.statut.label(class="form-label") }}
+                {{ form.statut(class="form-select") }}
+            </div>
+            <button type="submit" class="btn btn-warning">Modifier</button>
+            <a href="/chambres" class="btn btn-secondary">Annuler</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

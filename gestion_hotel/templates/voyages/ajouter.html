@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h2>✈️ Ajouter un Voyage</h2>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="mb-3">
+                {{ form.destination.label(class="form-label") }}
+                {{ form.destination(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.description.label(class="form-label") }}
+                {{ form.description(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.date_depart.label(class="form-label") }}
+                {{ form.date_depart(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.date_retour.label(class="form-label") }}
+                {{ form.date_retour(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.prix.label(class="form-label") }}
+                {{ form.prix(class="form-control") }}
+            </div>
+            <div class="mb-3">
+                {{ form.places_dispo.label(class="form-label") }}
+                {{ form.places_dispo(class="form-control") }}
+            </div>
+            <button type="submit" class="btn btn-success">Enregistrer</button>
+            <a href="/voyages" class="btn btn-secondary">Annuler</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
