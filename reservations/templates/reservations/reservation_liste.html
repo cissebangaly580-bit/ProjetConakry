@@ -1,0 +1,32 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block title %}Réservations - Conakry Travel & Hôtel{% endblock %}
+
+{% block content %}
+<h1>Réservations</h1>
+<a href="{% url 'reservation_nouveau' %}" class="btn-submit">Nouvelle réservation</a>
+{% if reservations %}
+<table class="table">
+    <thead>
+        <tr><th>ID</th><th>Client</th><th>Statut</th><th>Date</th><th></th></tr>
+    </thead>
+    <tbody>
+        {% for reservation in reservations %}
+        <tr>
+            <td>{{ reservation.id }}</td>
+            <td>{{ reservation.client.prenom }} {{ reservation.client.nom }}</td>
+            <td>{{ reservation.get_statut_display }}</td>
+            <td>{{ reservation.date_reservation }}</td>
+            <td>
+                <a href="{% url 'reservation_detail' reservation.pk %}">Voir</a> |
+                <a href="{% url 'reservation_modifier' reservation.pk %}">Modifier</a> |
+                <a href="{% url 'reservation_supprimer' reservation.pk %}">Annuler</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Aucune réservation enregistrée.</p>
+{% endif %}
+{% endblock %}

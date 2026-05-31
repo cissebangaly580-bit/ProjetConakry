@@ -1,0 +1,20 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block title %}Détail client - Conakry Travel & Hôtel{% endblock %}
+
+{% block content %}
+<h1>Détails du client</h1>
+<div class="card">
+    <p><strong>Nom :</strong> {{ client.nom }}</p>
+    <p><strong>Prénom :</strong> {{ client.prenom }}</p>
+    <p><strong>Email :</strong> {{ client.email }}</p>
+    <p><strong>Téléphone :</strong> {{ client.telephone }}</p>
+    <p><strong>Adresse :</strong> {{ client.adresse }}</p>
+</div>
+
+<div class="actions">
+    <a href="{% url 'client_update' client.pk %}" class="btn-submit">Modifier</a>
+    <a href="{% url 'client_confirm_delete' client.pk %}" class="btn-submit btn-danger">Supprimer</a>
+    <a href="{% url 'clients_liste' %}" class="btn-submit btn-secondary">Retour</a>
+</div>
+{% endblock %}

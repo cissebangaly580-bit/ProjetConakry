@@ -87,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'conakry_db',  # ← Vérifie qu'il n'y a PAS d'accent ici
         'USER': 'postgres',
-        'PASSWORD': 'cisse2002',
+        'PASSWORD': '12345',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -115,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
-LANGUAGE_CODE = "en-fr"
+LANGUAGE_CODE = "fr"
 
 TIME_ZONE = "UTC"
 
@@ -123,6 +123,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGE_CODE = "fr"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/

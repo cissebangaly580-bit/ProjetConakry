@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 
 
 class Client(models.Model):
@@ -54,10 +55,11 @@ class Agent(models.Model):
         ('admin', 'Administrateur'),
     ]
 
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True, related_name='agent')
     nom = models.CharField(max_length=100)
     prenom = models.CharField(max_length=100)
-    login = models.CharField(max_length=50, unique=True)
-    mdp_hash = models.CharField(max_length=255)
+    login = models.CharField(max_length=50, unique=True, null=True, blank=True)
+    mdp_hash = models.CharField(max_length=255, null=True, blank=True)
     role = models.CharField(max_length=20, choices=ROLES, default='agent')
 
     def __str__(self):

@@ -1,0 +1,22 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block title %}Détail chambre - Conakry Travel & Hôtel{% endblock %}
+
+{% block content %}
+<h1>Détails de la chambre</h1>
+<div class="card">
+    <p><strong>Numéro :</strong> {{ chambre.numero }}</p>
+    <p><strong>Type :</strong> {{ chambre.get_type_chambre_display }}</p>
+    <p><strong>Capacité :</strong> {{ chambre.capacite }}</p>
+    <p><strong>Prix par nuit :</strong> {{ chambre.prix_nuit }} GNF</p>
+    <p><strong>Statut :</strong> {{ chambre.get_statut_display }}</p>
+</div>
+<a href="{% url 'chambre_modifier' chambre.pk %}" class="btn-submit">Modifier</a>
+<a href="{% url 'chambre_supprimer' chambre.pk %}" class="btn-submit btn-danger">Supprimer</a>
+<a href="{% url 'chambre_liste' %}" class="btn-submit btn-secondary">Retour</a>
+{% if chambre.statut == 'libre' %}
+<a href="{% url 'chambre_checkin' chambre.pk %}" class="btn-submit">Check-in</a>
+{% else %}
+<a href="{% url 'chambre_checkout' chambre.pk %}" class="btn-submit btn-secondary">Check-out</a>
+{% endif %}
+{% endblock %}

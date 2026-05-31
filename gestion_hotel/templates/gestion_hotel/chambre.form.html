@@ -1,0 +1,13 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block title %}{% if chambre %}Modifier la chambre{% else %}Nouvelle chambre{% endif %} - Conakry Travel & Hôtel{% endblock %}
+
+{% block content %}
+<h1>{% if chambre %}Modifier la chambre{% else %}Nouvelle chambre{% endif %}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-submit">Enregistrer</button>
+    <a href="{% url 'chambre_liste' %}" class="btn-submit btn-secondary">Annuler</a>
+</form>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block title %}Détail facture - Conakry Travel & Hôtel{% endblock %}
+
+{% block content %}
+<h1>Détails de la facture</h1>
+<div class="card">
+    <p><strong>Montant :</strong> {{ facture.montant }} GNF</p>
+    <p><strong>Statut :</strong> {{ facture.get_statut_paiement_display }}</p>
+    <p><strong>Date :</strong> {{ facture.date_emission }}</p>
+    <p><strong>Mode :</strong> {{ facture.get_mode_paiement_display }}</p>
+</div>
+<p><strong>Réservation :</strong> {{ facture.reservation.id }}</p>
+<a href="{% url 'facture_paiement' facture.pk %}" class="btn-submit">Saisir le paiement</a>
+<a href="{% url 'facture_recu' facture.pk %}" class="btn-submit btn-secondary">Voir le reçu</a>
+<a href="{% url 'facture_liste' %}" class="btn-submit btn-secondary">Retour</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block title %}{% if client %}Modifier le client{% else %}Nouveau client{% endif %} - Conakry Travel & Hôtel{% endblock %}
+
+{% block content %}
+<h1>{% if client %}Modifier le client{% else %}Nouveau client{% endif %}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-submit">{% if client %}Mettre à jour{% else %}Enregistrer{% endif %}</button>
+    <a href="{% url 'clients_liste' %}" class="btn-submit btn-secondary">Retour</a>
+</form>
+{% endblock %}

@@ -3,40 +3,46 @@
 {% block title %}Tableau de bord - Conakry Travel & Hôtel{% endblock %}
 
 {% block content %}
-<h1 class="dashboard-title">Tableau de bord</h1>
-<p class="dashboard-subtitle">Bienvenue {{ user.username }} ! Voici l'état de votre agence.</p>
-
-<!-- STATISTIQUES -->
-<div class="stats-grid">
-    <div class="stat-card">
-        <div class="stat-number">👥</div>
-        <div class="stat-label">Clients</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number">✈️</div>
-        <div class="stat-label">Voyages</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number">🏨</div>
-        <div class="stat-label">Chambres</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number">📋</div>
-        <div class="stat-label">Réservations</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number">💰</div>
-        <div class="stat-label">Factures</div>
-    </div>
-    <div class="stat-card">
-        <div class="stat-number">👤</div>
-        <div class="stat-label">Agents</div>
+<div class="hero-panel">
+    <h1>Bonjour {{ user.username }}, bienvenue sur Conakry Travel & Hôtel.</h1>
+    <p>Retrouvez en un coup d'œil les indicateurs essentiels de votre activité et accédez rapidement aux modules de gestion.</p>
+    <div class="hero-actions">
+        <a href="/clients/">Clients</a>
+        <a href="/voyages/">Voyages</a>
+        <a href="/hotel/">Hôtel</a>
+        <a href="/reservations/">Réservations</a>
+        <a href="/factures/">Facturation</a>
     </div>
 </div>
 
-<!-- MODULES DISPONIBLES -->
+<h1 class="dashboard-title">Tableau de bord</h1>
+<p class="dashboard-subtitle">Voici l'état de votre agence en temps réel. Suivez les clients, voyages, chambres, réservations et factures depuis un même espace clair.</p>
+
+<div class="stats-grid">
+    <div class="stat-card">
+        <div class="stat-number">{{ clients_count }}</div>
+        <div class="stat-label">Clients</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{ voyages_count }}</div>
+        <div class="stat-label">Voyages</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{ chambres_count }}</div>
+        <div class="stat-label">Chambres</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{ reservations_count }}</div>
+        <div class="stat-label">Réservations</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-number">{{ factures_count }}</div>
+        <div class="stat-label">Factures</div>
+    </div>
+</div>
+
 <div class="card">
-    <h2 class="card-title">🚀 Modules du système</h2>
+    <h2 class="card-title">Modules disponibles</h2>
     <div class="modules-grid">
         <a href="/clients/" class="module-link">
             <div class="module-card module-clients">
@@ -71,18 +77,17 @@
     </div>
 </div>
 
-<!-- RÈGLES DE GESTION -->
 <div class="card">
-    <h2 class="card-title">📋 Règles de gestion implémentées</h2>
+    <h2 class="card-title">Règles de gestion implémentées</h2>
     <ul class="rules-list">
-        <li> RG1 : Email unique pour chaque client</li>
-        <li> RG2 : Pas de réservation si places = 0</li>
-        <li> RG3 : Pas de double attribution de chambre</li>
-        <li> RG4 : Réservation confirmée = facture générée</li>
-        <li> RG5 : Réservation annulée non modifiable</li>
-        <li> RG6 : Facture payée si montant reçu ≥ montant dû</li>
-        <li> RG7 : Paiement : Espèces ou Mobile Money uniquement</li>
-        <li> RG8 : Chaque agent limité à son rôle</li>
+        <li>RG1 : Email unique pour chaque client</li>
+        <li>RG2 : Pas de réservation si places = 0</li>
+        <li>RG3 : Pas de double attribution de chambre</li>
+        <li>RG4 : Réservation confirmée = facture générée</li>
+        <li>RG5 : Réservation annulée non modifiable</li>
+        <li>RG6 : Facture payée si montant reçu ≥ montant dû</li>
+        <li>RG7 : Paiement : Espèces ou Mobile Money uniquement</li>
+        <li>RG8 : Chaque agent limité à son rôle</li>
     </ul>
 </div>
 {% endblock %}

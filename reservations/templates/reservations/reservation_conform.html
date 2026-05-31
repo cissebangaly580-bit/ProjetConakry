@@ -1,0 +1,13 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block title %}Formulaire réservation - Conakry Travel & Hôtel{% endblock %}
+
+{% block content %}
+<h1>{% if reservation %}Modifier la réservation{% else %}Nouvelle réservation{% endif %}</h1>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-submit">Enregistrer</button>
+    <a href="{% url 'reservation_liste' %}" class="btn-submit btn-secondary">Annuler</a>
+</form>
+{% endblock %}

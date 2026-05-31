@@ -1,0 +1,16 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block content %}
+<h2>Rapport - Chiffre d'affaires</h2>
+<form method="get" class="form-inline mb-2">
+  <label>Début: <input type="date" name="start" value="{{ start }}" class="form-control"/></label>
+  <label>Fin: <input type="date" name="end" value="{{ end }}" class="form-control ml-2"/></label>
+  <button class="btn btn-secondary ml-2">Filtrer</button>
+  <a class="btn btn-outline-primary ml-2" href="?format=csv{% if start %}&start={{ start }}{% endif %}{% if end %}&end={{ end }}{% endif %}">Exporter CSV</a>
+</form>
+<ul>
+  <li>Total facturé: {{ total }}</li>
+  <li>Total payé: {{ paid }}</li>
+  <li>Total en attente: {{ pending }}</li>
+</ul>
+{% endblock %}

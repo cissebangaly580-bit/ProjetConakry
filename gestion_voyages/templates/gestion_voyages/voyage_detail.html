@@ -1,0 +1,18 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block title %}Détail voyage - Conakry Travel & Hôtel{% endblock %}
+
+{% block content %}
+<h1>Détails du voyage</h1>
+<div class="card">
+    <p><strong>Destination :</strong> {{ voyage.destination }}</p>
+    <p><strong>Description :</strong> {{ voyage.description }}</p>
+    <p><strong>Date départ :</strong> {{ voyage.date_depart }}</p>
+    <p><strong>Date retour :</strong> {{ voyage.date_retour }}</p>
+    <p><strong>Prix :</strong> {{ voyage.prix }} GNF</p>
+    <p><strong>Places disponibles :</strong> {{ voyage.places_dispo }}</p>
+</div>
+<a href="{% url 'voyage_modifier' voyage.pk %}" class="btn-submit">Modifier</a>
+<a href="{% url 'voyage_supprimer' voyage.pk %}" class="btn-submit btn-danger">Supprimer</a>
+<a href="{% url 'voyage_liste' %}" class="btn-submit btn-secondary">Retour</a>
+{% endblock %}

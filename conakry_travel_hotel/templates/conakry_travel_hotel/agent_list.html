@@ -1,0 +1,26 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block content %}
+<h2>Liste des agents</h2>
+<p><a href="{% url 'agent_nouveau' %}">Créer un nouvel agent</a></p>
+<table class="table">
+  <thead><tr><th>Nom</th><th>Prénom</th><th>Login</th><th>Role</th><th>Actions</th></tr></thead>
+  <tbody>
+    {% for agent in agents %}
+    <tr>
+      <td>{{ agent.nom }}</td>
+      <td>{{ agent.prenom }}</td>
+      <td>{{ agent.login }}</td>
+      <td>{{ agent.get_role_display }}</td>
+      <td>
+        <a href="{% url 'agent_modifier' agent.pk %}">modifier</a> |
+        <a href="{% url 'agent_delete' agent.pk %}">supprimer</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">Aucun agent</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}

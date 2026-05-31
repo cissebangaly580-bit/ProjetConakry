@@ -1,0 +1,33 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block title %}Voyages - Conakry Travel & Hôtel{% endblock %}
+
+{% block content %}
+<h1>Voyages</h1>
+<a href="{% url 'voyage_nouveau' %}" class="btn-submit">Nouvelle offre</a>
+{% if voyages %}
+<table class="table">
+    <thead>
+        <tr><th>Destination</th><th>Date départ</th><th>Date retour</th><th>Prix</th><th>Places</th><th></th></tr>
+    </thead>
+    <tbody>
+        {% for voyage in voyages %}
+        <tr>
+            <td>{{ voyage.destination }}</td>
+            <td>{{ voyage.date_depart }}</td>
+            <td>{{ voyage.date_retour }}</td>
+            <td>{{ voyage.prix }} GNF</td>
+            <td>{{ voyage.places_dispo }}</td>
+            <td>
+                <a href="{% url 'voyage_detail' voyage.pk %}">Voir</a> |
+                <a href="{% url 'voyage_modifier' voyage.pk %}">Modifier</a> |
+                <a href="{% url 'voyage_supprimer' voyage.pk %}">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Aucune offre de voyage disponible.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block title %}Détail réservation - Conakry Travel & Hôtel{% endblock %}
+
+{% block content %}
+<h1>Détails de la réservation</h1>
+<div class="card">
+    <p><strong>Client :</strong> {{ reservation.client.prenom }} {{ reservation.client.nom }}</p>
+    <p><strong>Statut :</strong> {{ reservation.get_statut_display }}</p>
+    <p><strong>Date :</strong> {{ reservation.date_reservation }}</p>
+</div>
+{% if concerner %}
+<div class="card">
+    <h2>Voyage</h2>
+    <p><strong>Destination :</strong> {{ concerner.voyage.destination }}</p>
+    <p><strong>Nombre de personnes :</strong> {{ concerner.nb_personnes }}</p>
+</div>
+{% endif %}
+{% if inclure %}
+<div class="card">
+    <h2>Hébergement</h2>
+    <p><strong>Chambre :</strong> {{ inclure.chambre.numero }}</p>
+    <p><strong>Période :</strong> {{ inclure.date_entree }} à {{ inclure.date_sortie }}</p>
+</div>
+{% endif %}
+{% if facture %}
+<div class="card">
+    <h2>Facture</h2>
+    <p><strong>Montant :</strong> {{ facture.montant }} GNF</p>
+    <p><strong>Statut :</strong> {{ facture.get_statut_paiement_display }}</p>
+    <p><strong>Mode :</strong> {{ facture.get_mode_paiement_display }}</p>
+    <a href="{% url 'facture_detail' facture.pk %}" class="btn-submit">Voir la facture</a>
+</div>
+{% endif %}
+<a href="{% url 'reservation_liste' %}" class="btn-submit btn-secondary">Retour</a>
+{% endblock %}

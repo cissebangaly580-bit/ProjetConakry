@@ -1,0 +1,13 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block title %}Annuler réservation - Conakry Travel & Hôtel{% endblock %}
+
+{% block content %}
+<h1>Annuler la réservation</h1>
+<p>Voulez-vous vraiment annuler la réservation n°{{ reservation.id }} ?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn-submit btn-danger">Oui, annuler</button>
+    <a href="{% url 'reservation_detail' reservation.pk %}" class="btn-submit btn-secondary">Annuler</a>
+</form>
+{% endblock %}

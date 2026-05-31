@@ -1,0 +1,17 @@
+{% extends 'conakry_travel_hotel/base.html' %}
+
+{% block title %}Paiement - Conakry Travel & Hôtel{% endblock %}
+
+{% block content %}
+<h1>Validation du paiement</h1>
+<div class="card">
+    <p><strong>Facture :</strong> {{ facture.id }}</p>
+    <p><strong>Montant :</strong> {{ facture.montant }} GNF</p>
+</div>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-submit">Valider le paiement</button>
+    <a href="{% url 'facture_detail' facture.pk %}" class="btn-submit btn-secondary">Annuler</a>
+</form>
+{% endblock %}
